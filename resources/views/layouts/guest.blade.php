@@ -17,16 +17,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="container mx-auto p-8 min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </div>
+    <div class=" min-h-screen bg-gray-100">
+        @include('layouts.navigation')
+
+        <!-- Page Heading -->
+        @isset($header)
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+        @endisset
 
         <x-flash-message :messages="session('success')"
             class="bg-green-100 text-green-800 border-green-500" />
@@ -41,9 +46,10 @@
             class="bg-amber-100 text-amber-800 border-amber-500" />
 
 
-        <div class="w-full mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <!-- Page Content -->
+        <main class="container mx-auto my-8 bg-white sm:rounded-lg shadow overflow-hidden p-8">
             {{ $slot }}
-        </div>
+        </main>
     </div>
 </body>
 
